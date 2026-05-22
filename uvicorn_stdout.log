@@ -1,0 +1,11 @@
+Loading model from ./xlm-roberta-scam-model on cuda...
+Model ready.
+INFO:     127.0.0.1:63408 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63411 - "POST /predict HTTP/1.1" 200 OK
+INFO:     60.48.180.128:0 - "OPTIONS /predict HTTP/1.1" 200 OK
+INFO:     60.48.180.128:0 - "POST /predict HTTP/1.1" 200 OK
+INFO:     60.48.180.128:0 - "POST /predict HTTP/1.1" 200 OK
+INFO:     60.48.180.128:0 - "POST /predict HTTP/1.1" 200 OK
+INFO:     60.48.180.128:0 - "POST /predict HTTP/1.1" 200 OK
+INFO:     60.48.180.128:0 - "POST /predict HTTP/1.1" 200 OK
+INFO:     60.48.180.128:0 - "POST /predict HTTP/1.1" 200 OK
