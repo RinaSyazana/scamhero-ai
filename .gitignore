@@ -1,0 +1,14 @@
+# Dependencies
+node_modules/
+
+# Frontend Environment variables
+frontend/.env
+frontend/.env.local
+
+# Backend Production Secrets
+backend/config/*.json
+backend/.env
+
+# Operating system logs
+.DS_Store
+Thumbs.db
