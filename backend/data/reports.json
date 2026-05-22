@@ -1,0 +1,36 @@
+[
+  {
+    "id": "report_1779421582789_msyb359n5",
+    "title": "Car Incident Scam",
+    "description": "There's an unknown number from 012-34567894, saying that I need to pay him RM300 for car incident. But I don't even drive on the road !",
+    "platform": "WhatsApp",
+    "location": "Current Location (KL)",
+    "amountLost": 300,
+    "mediaUrls": [],
+    "verificationStatus": "Published",
+    "likes": 0,
+    "dislikes": 0,
+    "createdAt": "2026-05-22T03:46:22.789Z",
+    "reportedBy": {
+      "username": "Rina Syazana",
+      "avatarUrl": "https://lh3.googleusercontent.com/a/ACg8ocLQwrLBAn1xinAzpLM5xP29_EW9cr26KixsAMLxxc-1WairQpdf=s96-c"
+    }
+  },
+  {
+    "id": "report_1779422441014_pcnwxtkjq",
+    "title": "Fake Parcel",
+    "description": "I received fake parcel that cost RM1345.00.",
+    "platform": "WhatsApp",
+    "location": "Current Location (KL)",
+    "amountLost": 1345,
+    "mediaUrls": [],
+    "verificationStatus": "Published",
+    "likes": 0,
+    "dislikes": 0,
+    "createdAt": "2026-05-22T04:00:41.014Z",
+    "reportedBy": {
+      "username": "RINA SYAZANA RAHMAN",
+      "avatarUrl": "https://lh3.googleusercontent.com/a/ACg8ocIcGZl0Ezk2YkwkOqjbK1n4stBJoZCNYL5D3zdRG3S5DUIm4g=s96-c"
+    }
+  }
+]
