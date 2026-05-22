@@ -1,7 +1,58 @@
-import { X, Image as ImageIcon, Plus, XCircle, MapPin, Smartphone, Send, TrendingUp, Filter, AlertCircle } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { X, Image as ImageIcon, Plus, XCircle, MapPin, Smartphone, Send, TrendingUp, Filter, AlertCircle, DollarSign } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+import api from '../api';
 
 const AddReport = () => {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [platform, setPlatform] = useState('WhatsApp');
+  const [location, setLocation] = useState('Current Location (KL)');
+  const [amountLost, setAmountLost] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSubmit = async () => {
+    if (!title || !description) {
+      setError('Please provide a title and description for the report.');
+      return;
+    }
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      // Send the POST request to our backend with user info in the body
+      await api.post('/api/reports', {
+        title,
+        description,
+        platform,
+        location,
+        amountLost: amountLost ? parseFloat(amountLost) : 0,
+        reportedBy: {
+          username: user?.displayName || user?.email || 'Anonymous',
+          avatarUrl: user?.photoURL || ''
+        }
+      });
+
+      // Clear form and navigate back to feed
+      setTitle('');
+      setDescription('');
+      setAmountLost('');
+      navigate('/reports');
+
+    } catch (err: any) {
+      console.error('Submit error:', err);
+      setError(err.response?.data?.error || err.message || 'Failed to submit report');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="max-w-7xl mx-auto pt-4 pb-24 px-2 lg:px-0">
       
@@ -28,50 +79,55 @@ const AddReport = () => {
               
               {/* Author Identity Header */}
               <div className="flex items-center mb-4">
-                <div className="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-700 font-bold text-sm border border-indigo-200 mr-3">
-                  UA
-                </div>
-                <span className="text-sm font-bold text-slate-700">@User_A</span>
+                {user?.photoURL ? (
+                  <img src={user.photoURL} alt="Avatar" className="w-10 h-10 rounded-full mr-3 border border-indigo-200" />
+                ) : (
+                  <div className="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-700 font-bold text-sm border border-indigo-200 mr-3">
+                    {user?.displayName ? user.displayName.charAt(0).toUpperCase() : 'U'}
+                  </div>
+                )}
+                <span className="text-sm font-bold text-slate-700">@{user?.displayName || 'Anonymous'}</span>
               </div>
+
+              {error && (
+                <div className="mb-4 p-3 bg-red-50 text-red-600 border border-red-100 rounded-lg text-sm font-medium">
+                  {error}
+                </div>
+              )}
 
               <div className="flex flex-col md:flex-row gap-8">
                 
                 {/* Left: Text Area & Media (flex-grow) */}
-                <div className="flex-1 space-y-6">
+                <div className="flex-1 space-y-4">
                   
+                  {/* Title Input */}
+                  <div>
+                    <input 
+                      type="text"
+                      className="w-full text-slate-800 text-xl font-bold placeholder-slate-300 border-b border-slate-100 pb-2 focus:border-[#1D61D1] focus:ring-0 outline-none transition-colors"
+                      placeholder="Scam Title / Subject"
+                      value={title}
+                      onChange={(e) => setTitle(e.target.value)}
+                    />
+                  </div>
+
                   {/* Text Area */}
                   <div>
                     <textarea 
-                      className="w-full text-slate-800 text-lg placeholder-slate-300 border-none focus:ring-0 resize-none outline-none leading-relaxed min-h-[120px]"
+                      className="w-full text-slate-800 text-base placeholder-slate-300 border-none focus:ring-0 resize-none outline-none leading-relaxed min-h-[120px]"
                       placeholder="Describe the scam alert (e.g., alert title, platform used, scammer tactics)..."
+                      value={description}
+                      onChange={(e) => setDescription(e.target.value)}
                     ></textarea>
                   </div>
 
                   {/* Multi-Image Upload Grid */}
-                  <div className="space-y-2">
+                  <div className="space-y-2 pt-4 border-t border-slate-100">
                     <div className="flex gap-3 overflow-x-auto pb-2">
-                      
-                      {/* Large Upload Box */}
                       <div className="w-32 h-32 flex-shrink-0 border-2 border-dashed border-slate-200 rounded-xl flex flex-col items-center justify-center text-slate-400 hover:bg-slate-50 hover:border-[#1D61D1]/50 hover:text-[#1D61D1] transition-all cursor-pointer group">
                         <ImageIcon className="w-6 h-6 mb-2 group-hover:scale-110 transition-transform" />
-                        <span className="text-[10px] font-bold text-center px-2">Add First Image/Media</span>
+                        <span className="text-[10px] font-bold text-center px-2">Add Media</span>
                       </div>
-                      
-                      {/* Preview Slot 1 */}
-                      <div className="relative w-24 h-24 flex-shrink-0 bg-slate-100 rounded-xl border border-slate-200 overflow-hidden group">
-                        <div className="absolute inset-0 flex items-center justify-center text-slate-300">
-                          <ImageIcon className="w-6 h-6" />
-                        </div>
-                        <button className="absolute top-1 right-1 bg-white rounded-full p-0.5 text-slate-400 hover:text-rose-500 shadow-sm opacity-0 group-hover:opacity-100 transition-opacity">
-                          <XCircle className="w-4 h-4" />
-                        </button>
-                      </div>
-
-                      {/* Preview Slot 2 */}
-                      <div className="relative w-24 h-24 flex-shrink-0 border border-slate-200 border-dashed rounded-xl flex items-center justify-center text-slate-300 hover:bg-slate-50 cursor-pointer">
-                        <Plus className="w-6 h-6" />
-                      </div>
-
                     </div>
                     <p className="text-[11px] font-semibold text-slate-400">
                       You can upload up to 5 images or videos (max 20MB per file).
@@ -88,7 +144,11 @@ const AddReport = () => {
                       <MapPin className="w-3.5 h-3.5 mr-1" /> Location/Region
                     </label>
                     <div className="relative">
-                      <select className="w-full border border-slate-200 rounded-lg p-2.5 text-sm font-medium bg-slate-50 focus:outline-none focus:ring-2 focus:ring-[#1D61D1]/20 focus:border-[#1D61D1] transition-all text-slate-700 appearance-none cursor-pointer">
+                      <select 
+                        value={location}
+                        onChange={(e) => setLocation(e.target.value)}
+                        className="w-full border border-slate-200 rounded-lg p-2.5 text-sm font-medium bg-slate-50 focus:outline-none focus:ring-2 focus:ring-[#1D61D1]/20 focus:border-[#1D61D1] transition-all text-slate-700 appearance-none cursor-pointer"
+                      >
                         <option>Current Location (KL)</option>
                         <option>Selangor, MY</option>
                         <option>Penang, MY</option>
@@ -105,7 +165,11 @@ const AddReport = () => {
                       <Smartphone className="w-3.5 h-3.5 mr-1" /> Platform/Channel
                     </label>
                     <div className="relative">
-                      <select className="w-full border border-slate-200 rounded-lg p-2.5 text-sm font-medium bg-slate-50 focus:outline-none focus:ring-2 focus:ring-[#1D61D1]/20 focus:border-[#1D61D1] transition-all text-slate-700 appearance-none cursor-pointer">
+                      <select 
+                        value={platform}
+                        onChange={(e) => setPlatform(e.target.value)}
+                        className="w-full border border-slate-200 rounded-lg p-2.5 text-sm font-medium bg-slate-50 focus:outline-none focus:ring-2 focus:ring-[#1D61D1]/20 focus:border-[#1D61D1] transition-all text-slate-700 appearance-none cursor-pointer"
+                      >
                         <option>WhatsApp</option>
                         <option>Telegram</option>
                         <option>Facebook Marketplace</option>
@@ -116,6 +180,24 @@ const AddReport = () => {
                       <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none text-slate-400">
                         <ChevronDownIcon className="w-4 h-4" />
                       </div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-500 uppercase tracking-wide mb-2 flex items-center">
+                      <DollarSign className="w-3.5 h-3.5 mr-1" /> Amount Lost
+                    </label>
+                    <div className="relative">
+                      <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-400 text-sm font-bold">
+                        RM
+                      </div>
+                      <input 
+                        type="number"
+                        placeholder="0.00"
+                        value={amountLost}
+                        onChange={(e) => setAmountLost(e.target.value)}
+                        className="w-full pl-9 pr-3 border border-slate-200 rounded-lg p-2.5 text-sm font-medium bg-slate-50 focus:outline-none focus:ring-2 focus:ring-[#1D61D1]/20 focus:border-[#1D61D1] transition-all text-slate-700"
+                      />
                     </div>
                   </div>
 
@@ -134,11 +216,22 @@ const AddReport = () => {
 
             {/* Workspace Footer & Action Triggers */}
             <div className="bg-slate-50 border-t border-slate-100 p-4 sm:px-6 flex flex-col-reverse sm:flex-row justify-between items-center gap-3">
-              <button className="w-full sm:w-auto bg-transparent border border-transparent text-slate-500 hover:bg-slate-200 hover:text-slate-700 font-bold py-2.5 px-5 rounded-xl text-sm transition-colors duration-200">
+              <button 
+                onClick={() => navigate('/reports')}
+                className="w-full sm:w-auto bg-transparent border border-transparent text-slate-500 hover:bg-slate-200 hover:text-slate-700 font-bold py-2.5 px-5 rounded-xl text-sm transition-colors duration-200"
+              >
                 Discard Draft
               </button>
-              <button className="w-full sm:w-auto bg-[#1D61D1] hover:bg-blue-700 text-white font-bold py-2.5 px-6 rounded-xl text-sm transition-all duration-200 shadow-sm shadow-blue-500/20 flex items-center justify-center">
-                <Send className="w-4 h-4 mr-2" />
+              <button 
+                onClick={handleSubmit}
+                disabled={loading}
+                className="w-full sm:w-auto bg-[#1D61D1] hover:bg-blue-700 disabled:bg-blue-400 disabled:cursor-not-allowed text-white font-bold py-2.5 px-6 rounded-xl text-sm transition-all duration-200 shadow-sm shadow-blue-500/20 flex items-center justify-center"
+              >
+                {loading ? (
+                  <div className="w-4 h-4 mr-2 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
+                ) : (
+                  <Send className="w-4 h-4 mr-2" />
+                )}
                 Submit Report
               </button>
             </div>
@@ -149,7 +242,6 @@ const AddReport = () => {
         {/* Supporting Right Sidebar (35%) */}
         <div className="lg:w-[35%] space-y-6">
           
-          {/* Active Context: Trending Scams */}
           <div className="bg-white rounded-[16px] p-6 border border-slate-200 shadow-sm">
             <h3 className="text-base font-bold text-slate-800 mb-4 flex items-center">
               <TrendingUp className="w-5 h-5 mr-2 text-emerald-500" />
@@ -174,7 +266,6 @@ const AddReport = () => {
             </div>
           </div>
 
-          {/* Passive Analytics / Filters Info */}
           <div className="bg-slate-50 rounded-[16px] p-6 border border-slate-200 shadow-sm">
             <h3 className="text-sm font-bold text-slate-800 mb-2 flex items-center">
               <Filter className="w-4 h-4 mr-2 text-slate-400" />
@@ -183,11 +274,11 @@ const AddReport = () => {
             <ul className="text-xs font-medium text-slate-500 space-y-2 mt-4">
               <li className="flex items-start">
                 <div className="w-1.5 h-1.5 rounded-full bg-slate-300 mt-1.5 mr-2 flex-shrink-0"></div>
-                Ensure screenshots do not contain personal sensitive information (e.g. full IC number).
+                Ensure screenshots do not contain personal sensitive information.
               </li>
               <li className="flex items-start">
                 <div className="w-1.5 h-1.5 rounded-full bg-slate-300 mt-1.5 mr-2 flex-shrink-0"></div>
-                The AI Copilot will automatically redact visible phone numbers not linked to the scam.
+                The AI Copilot will automatically redact visible phone numbers.
               </li>
               <li className="flex items-start">
                 <div className="w-1.5 h-1.5 rounded-full bg-slate-300 mt-1.5 mr-2 flex-shrink-0"></div>
@@ -203,8 +294,7 @@ const AddReport = () => {
   );
 };
 
-// Helper component for chevron down since it wasn't imported at top to avoid conflict
-function ChevronDownIcon(props) {
+function ChevronDownIcon(props: any) {
   return (
     <svg
       {...props}

@@ -10,10 +10,16 @@ export interface ScamReport {
   description: string;
   platform: string;
   location: string;
+  amountLost?: number;
   mediaUrls: string[];
-  verificationStatus: 'Verified' | 'Unverified' | 'Awaiting Review';
+  verificationStatus: 'Verified' | 'Unverified' | 'Awaiting Review' | 'Published';
   likes: number;
   dislikes: number;
+  createdAt: string;
+  reportedBy: {
+    username: string;
+    avatarUrl: string;
+  };
 }
 
 export interface RuleReason {
