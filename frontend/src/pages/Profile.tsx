@@ -33,7 +33,7 @@ const Profile: React.FC = () => {
     .slice(0, 2);
 
   return (
-    <div className="max-w-xl mx-auto space-y-6 pt-4 px-2 lg:px-0">
+    <div className="max-w-xl mx-auto space-y-6 pt-4 px-2 lg:px-0 bg-transparent">
 
       {/* Avatar + Name Card */}
       <div className="bg-white rounded-[24px] p-8 shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 flex flex-col items-center text-center">

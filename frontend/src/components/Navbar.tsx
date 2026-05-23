@@ -5,7 +5,7 @@ const Navbar = () => {
     <nav className="bg-white border-b border-slate-100 sticky top-0 z-40 shadow-sm">
       <div className="container mx-auto px-6">
         <div className="flex justify-between items-center h-16">
-          
+
           {/* Logo & Location */}
           <div className="flex items-center space-x-6 lg:space-x-10 w-1/4">
             <div className="flex items-center space-x-2">
@@ -24,14 +24,14 @@ const Navbar = () => {
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                 <Search className="h-4 w-4 text-slate-400" />
               </div>
-              <input 
-                type="text" 
-                className="block w-full pl-10 pr-3 py-2 border border-slate-200 rounded-xl leading-5 bg-slate-50 placeholder-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-[#1D61D1]/20 focus:border-[#1D61D1] sm:text-sm transition-all" 
-                placeholder="Search for numbers, URLs, or scam types..." 
+              <input
+                type="text"
+                className="block w-full pl-10 pr-3 py-2 border border-slate-200 rounded-xl leading-5 bg-slate-50 placeholder-slate-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-[#1D61D1]/20 focus:border-[#1D61D1] sm:text-sm transition-all"
+                placeholder="Search for numbers, URLs, or scam types..."
               />
             </div>
           </div>
-          
+
           {/* Right Actions */}
           <div className="flex items-center justify-end space-x-4 w-1/4">
             <div className="relative p-2 text-slate-400 hover:text-slate-600 cursor-pointer transition-colors">

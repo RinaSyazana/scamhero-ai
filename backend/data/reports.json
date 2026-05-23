@@ -32,5 +32,76 @@
       "username": "RINA SYAZANA RAHMAN",
       "avatarUrl": "https://lh3.googleusercontent.com/a/ACg8ocIcGZl0Ezk2YkwkOqjbK1n4stBJoZCNYL5D3zdRG3S5DUIm4g=s96-c"
     }
+  },
+  {
+    "id": "report_1779445371941_nf25qoug3",
+    "title": "Investment Scam",
+    "description": "I keep receiving scam from email ask me to do investment.",
+    "platform": "Email",
+    "location": "Current Location (KL)",
+    "amountLost": 0,
+    "mediaUrls": [],
+    "verificationStatus": "Published",
+    "likes": 0,
+    "dislikes": 0,
+    "createdAt": "2026-05-22T10:22:51.941Z",
+    "reportedBy": {
+      "username": "RINA SYAZANA RAHMAN",
+      "avatarUrl": "https://lh3.googleusercontent.com/a/ACg8ocIcGZl0Ezk2YkwkOqjbK1n4stBJoZCNYL5D3zdRG3S5DUIm4g=s96-c"
+    }
+  },
+  {
+    "id": "report_1779471092206_20sztxmzo",
+    "title": "Chat Scam",
+    "description": "I received a text scam that ask me to click the link to get RM50,000. But I don't click on it. Be careful everyone !",
+    "platform": "SMS",
+    "location": "Kuala Lumpur, MY",
+    "amountLost": 0,
+    "mediaUrls": [],
+    "verificationStatus": "Published",
+    "likes": 0,
+    "dislikes": 0,
+    "createdAt": "2026-05-22T17:31:32.208Z",
+    "reportedBy": {
+      "username": "Rina Syazana",
+      "avatarUrl": "https://lh3.googleusercontent.com/a/ACg8ocLQwrLBAn1xinAzpLM5xP29_EW9cr26KixsAMLxxc-1WairQpdf=s96-c"
+    }
+  },
+  {
+    "id": "report_1779539918167_utkfyxr8f",
+    "title": "Redeem scam",
+    "description": "The chat ask me to click on link to redeem the prize.",
+    "platform": "SMS",
+    "location": "Johor, MY",
+    "amountLost": 500,
+    "mediaUrls": [],
+    "verificationStatus": "Published",
+    "likes": 0,
+    "dislikes": 0,
+    "createdAt": "2026-05-23T12:38:38.167Z",
+    "reportedBy": {
+      "username": "Anonymous",
+      "avatarUrl": ""
+    }
+  },
+  {
+    "id": "report_1779541159242_w9746q7ku",
+    "title": "Redeem Scam",
+    "description": "I received a message ask me to redeem a prize. Without being cautious, I have entered that link and lost RM5000 just like that.",
+    "platform": "SMS",
+    "location": "Johor, MY",
+    "amountLost": 5000,
+    "mediaUrls": [
+      "/uploads/1779541159235-719120752.png"
+    ],
+    "verificationStatus": "Published",
+    "likes": 0,
+    "dislikes": 0,
+    "createdAt": "2026-05-23T12:59:19.242Z",
+    "reportedBy": {
+      "username": "Rina Syazana",
+      "avatarUrl": "https://lh3.googleusercontent.com/a/ACg8ocLQwrLBAn1xinAzpLM5xP29_EW9cr26KixsAMLxxc-1WairQpdf=s96-c",
+      "uid": "UcSNKJ2M4hStx7CswoJfK9VhLIH2"
+    }
   }
 ]

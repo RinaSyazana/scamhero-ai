@@ -19,6 +19,7 @@ export interface ScamReport {
   reportedBy: {
     username: string;
     avatarUrl: string;
+    uid?: string;
   };
 }
 

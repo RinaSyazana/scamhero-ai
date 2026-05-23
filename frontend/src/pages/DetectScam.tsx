@@ -278,7 +278,7 @@ const DetectScam = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto space-y-6 pt-4 px-2 lg:px-0">
+    <div className="w-full space-y-6 pt-4 px-2 sm:px-4 bg-transparent">
       
       {/* Page Header */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-5">
